@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="view\\css\\headerStatic.css">
+    <link rel="stylesheet" href="view\\css\\loginStatic.css">
+    <title>Auto Shop - Login</title>
+</head>
+<body>
+    <header>
+        <a id="icon" href="http:\\localhost:8000/">
+            <img src="view\\css\\PhotoGallery\\logo.png" alt="">
+            <h1>AUTO <span>SHOP</span></h1>
+        </a>
+        <nav>
+            <a href="http:\\localhost:8000/operacoes">Operações</a>
+            <a href="http:\\localhost:8000/contato">Contato</a>
+        </nav>
+        <aside id="displayConfig">
+            <img src="view\\css\\PhotoGallery\\userIcon.png" alt="">
+            <h2 id="LoginArea" onclick="login()">Entre ou cadastra-se</h2>
+            <h3 id="Exit" onclick="set()">sair</h3>
+        </aside>
+    </header>
+    <main>
+        <section>
+            <div>ENTRAR</div>
+            <aside>
+                <input type="email" name="" id="Email" placeholder="email">
+                <input type="password" name="" id="Password" placeholder="senha">
+                <button onclick="login()">Login</button>
+            </aside>
+            <nav>
+                <a href="http:\\localhost:8000/cadastro">Realizar Cadastro</a>
+                <a href="http:\\localhost:8000/redefinirsenha">Redefinir senha</a>
+            </nav>
+        </section>
+    </main>
+    <script>
+        const Email = document.getElementById('Email')
+        const Password = document.getElementById('Password')
+        var listUsers = []
+
+        function login(){
+            var email = Email.value
+            var password = Password.value
+            var index = validateUser(email,password)
+            if(index != -1){
+                localStorage.clear()
+                localStorage.setItem('isLoad',true)
+                localStorage.setItem('Nome',listUsers[index].Nome)
+                localStorage.setItem('Sobrenome',listUsers[index].Sobrenome)
+                localStorage.setItem('Email',listUsers[index].Email)
+                window.location.href = "/"
+            }
+            else{
+                alert('Email ou senha incorretos, Por favor tente novamente!')
+            }
+        }
+
+        fetch("/UserData.json")
+            .then((data)=>{
+                return data.json()
+            })
+            .then((vector)=>{
+                getListUsers(vector)
+            })
+            .catch((e)=>{
+                console.log(e)
+            })
+
+        function getListUsers(vector){
+            listUsers = vector
+        }
+
+        function validateUser(email, password){
+            for(var i = 0; i < listUsers.length; i++){
+                user = listUsers[i]
+                if(user.Email == email && user.Password == password){
+                    return i
+                }
+            }
+            return -1
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="view\\css\\headerStatic.css">
+    <link rel="stylesheet" href="view\\css\\operacoesStatic.css">
+    <title>Auto Shop - Operações</title>
+</head>
+<body>
+    <header>
+        <a id="icon" href="http:\\localhost:8000/">
+            <img src="view\\css\\PhotoGallery\\logo.png" alt="">
+            <h1>AUTO <span>SHOP</span></h1>
+        </a>
+        <nav>
+            <a href="http:\\localhost:8000/operacoes">Operações</a>
+            <a href="http:\\localhost:8000/contato">Contato</a>
+        </nav>
+        <aside>
+            <img src="view\\css\\PhotoGallery\\userIcon.png" alt="">
+            <h2 id="LoginArea" onclick="login()">Entre ou cadastra-se</h2>
+            <h3 id="Exit" onclick="set()">sair</h3>
+        </aside>
+    </header>
+    <main>
+        <section onclick="openSell()">
+            <img src="view\\css\\PhotoGallery\\PageStatic\\sellIcon.png" alt="">
+            <h3>Vender Carro</h3>
+        </section>
+        <section onclick="openBuy()">
+            <img src="view\\css\\PhotoGallery\\PageStatic\\buyIcon.png" alt="">
+            <h3>Comprar Carro</h3>
+        </section>
+    </main>
+    <script>
+        const Exit = document.getElementById('Exit')
+        control = true
+        
+        function openSell(){
+            if(localStorage.getItem('isLoad') == 'true'){
+                window.location.href = "venderCarros"
+            }
+            else{
+                alert('Necessário realizar o Login!')
+            }
+        }
+
+        function openBuy(){
+            if(localStorage.getItem('isLoad') == 'true'){
+                window.location.href = "/comprarCarros"
+            }
+            else{
+                alert('Necessário realizar o Login!')
+            }
+        }
+
+        function login(){
+            if(localStorage.getItem('isLoad')=='true'){
+                if(control){
+                    Exit.style.display = 'flex'
+                    control = false
+                }
+                else{
+                    Exit.style.display = 'none'
+                    control = true
+                }
+            }
+            else{
+                window.location.href = "/login"
+            }
+        }
+        
+        function isLoad(){
+            if(localStorage.getItem('isLoad') == 'true'){
+                document.getElementById('LoginArea').innerText = 'Olá, ' + localStorage.getItem('Nome') + ' ' + localStorage.getItem('Sobrenome')
+                control = false
+            }
+        }
+
+        function set(){
+            localStorage.clear()
+            location.reload()
+        }
+
+        isLoad()
+    </script>
+</body>
+</html>

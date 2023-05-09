@@ -1,0 +1,87 @@
+main{
+    width: 100%;
+    height: 90vh;
+    background-image: url(./PhotoGallery/background.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+    font-family: WorkSans;
+    color: white;
+}
+    main h1{
+        width: 100%;
+        height: 15vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    main .boxCard{
+        width: 100%;
+        height: 72.75vh;
+        padding: 2.25vh 0 0 0;
+        display: flex;
+        flex-flow: row wrap;
+        align-content:start;
+    }
+        main .Card{
+            width: 23%;
+            margin: 1vh 1%;
+            height: 22vh;
+            border-radius: 2vh;
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            background-color: red;
+        }
+        main img{
+            height: 15vh;
+            width: 15vh;
+            margin: 2vh;
+            border-radius: 100%;
+            background-color: black;
+        }
+        main .text{
+            width: calc(100% - 21vh);
+            height: 15vh;
+        }
+            main .text .h1{
+                width: 100%;
+                height: 4vh;
+                display: flex;
+                align-items: center;
+                color: black;
+                font-size: 0.9rem;
+                font-weight: bold;
+            }
+            main .text .h2{
+                width: 100%;
+                height: 4vh;
+                display: flex;
+                align-items: center;
+                color: rgb(255, 255, 255);
+                font-size: 0.7rem;
+            }
+            main .text .h3{
+                width: 60%;
+                height: 3vh;
+                margin: 2vh 20%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 0.8rem;
+                background-color: rgb(0, 0, 0);
+                color: red;
+                cursor: pointer;
+            }
+            main .text .h3:active{
+                transform: scale(0.95);
+            }
+
+
+@font-face {    
+    font-family: WorkSans;    
+    src: url(./font/WorkSans.ttf);
+}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="view\\css\\headerStatic.css">
+    <link rel="stylesheet" href="view\\css\\cadastroStatic.css">
+    <title>Auto Shop - Cadastro</title>
+</head>
+<body>
+    <header>
+        <a id="icon" href="http:\\localhost:8000/">
+            <img src="view\\css\\PhotoGallery\\logo.png" alt="">
+            <h1>AUTO <span>SHOP</span></h1>
+        </a>
+        <nav>
+            <a href="http:\\localhost:8000/operacoes">Operações</a>
+            <a href="http:\\localhost:8000/contato">Contato</a>
+        </nav>
+        <aside id="displayConfig">
+            <img src="view\\css\\PhotoGallery\\userIcon.png" alt="">
+            <h2 id="LoginArea" onclick="login()">Entre ou cadastra-se</h2>
+            <h3 id="Exit" onclick="set()">sair</h3>
+        </aside>
+    </header>
+    <main>
+        <section>
+            <h1>Inscrição</h1>
+            <input type="text" name="" id="Nome" placeholder="Nome" required>
+            <input type="text" name="" id="Sobrenome" placeholder="Sobrenome" required>
+            <input type="email" name="" id="Email" placeholder="Email" required>
+            <input type="tel" name="" id="Celular" placeholder="Celular (XX)xxxxx-xxxx" required>
+            <input type="password" name="" id="Password" placeholder="Senha" required>
+            <input type="password" name="" id="PasswordAux" placeholder="Senha Novamente" required>
+            <button type="submit" onclick="inscricao()">Inscrever-se</button>
+        </section>
+    </main>
+    <script>
+        const Nome = document.getElementById("Nome")
+        const Sobrenome = document.getElementById("Sobrenome")
+        const Email = document.getElementById("Email")
+        const Celular = document.getElementById("Celular")
+        const Password = document.getElementById("Password")
+        const PasswordAux = document.getElementById("PasswordAux")
+        var listUsers = []
+
+        function inscricao(){
+            if(Nome.value == ''){
+                alert('Por favor insira um Nome!')
+                return
+            }
+            if(Sobrenome.value == ''){
+                alert('Por favor insira um Sobrenome!')
+                return
+            }
+            if(!validateEmail(Email.value)){
+                alert('Por favor insira um Email válido!')
+                return
+            }
+            if(!validationPhone(Celular.value)){
+                alert('Por favor insira um Telefone válido!')
+                return 
+            }
+            if(!validatePassWord(Password.value)){
+                return
+            }
+            if(Password.value != PasswordAux.value){
+                alert('Por favor confirme a senha novamente!')
+                return
+            }
+            if(emailCheck(Email.value)){
+                alert('Por favor insira um novo Email, esse já se encontra em uso!')
+                return
+            }
+            else{
+                const request = new XMLHttpRequest()
+                request.open("POST", "/setUser")
+                request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
+                var files = JSON.stringify({
+                    "Nome":Nome.value,
+                    "Sobrenome":Sobrenome.value,
+                    "Email":Email.value,
+                    "Celular":Celular.value,
+                    "Password":Password.value
+                })
+                request.send(files)
+                request.onload = () => {
+                    if (request.readyState == 4 && request.status == 201){
+                        window.location.href = "/login"
+                    } else {
+                        alert(`Erro, por favor tente novamente!`);
+                    }
+                }              
+            }
+        }
+
+        function validateEmail(email) {
+            var re = /\S+@\S+\.\S+/;
+            return re.test(email);
+        }
+
+        function validationPhone(telefone) {
+            telefone = telefone.replace(/\D/g, '');
+
+            if (!(telefone.length >= 10 && telefone.length <= 11)) return false;
+
+            if (telefone.length == 11 && parseInt(telefone.substring(2, 3)) != 9) return false;
+
+            for (var n = 0; n < 10; n++) {
+                if (telefone == new Array(11).join(n) || telefone == new Array(12).join(n)) return false;
+            }
+            var codigosDDD = [11, 12, 13, 14, 15, 16, 17, 18, 19,
+                21, 22, 24, 27, 28, 31, 32, 33, 34,
+                35, 37, 38, 41, 42, 43, 44, 45, 46,
+                47, 48, 49, 51, 53, 54, 55, 61, 62,
+                64, 63, 65, 66, 67, 68, 69, 71, 73,
+                74, 75, 77, 79, 81, 82, 83, 84, 85,
+                86, 87, 88, 89, 91, 92, 93, 94, 95,
+                96, 97, 98, 99];
+            if (codigosDDD.indexOf(parseInt(telefone.substring(0, 2))) == -1) return false;
+
+            if (new Date().getFullYear() < 2017) return true;
+            if (telefone.length == 10 && [2, 3, 4, 5, 7].indexOf(parseInt(telefone.substring(2, 3))) == -1) return false;
+
+            return true;
+        }
+    
+        function validatePassWord(senha){
+            if(senha.length < 8){
+                alert('Por favor insira uma Senha com +8 dígitos!')
+                return false
+            }
+            const regex = /[0-9]/
+            if(!regex.test(senha)){
+                alert('Por favor insira uma Senha com ao menos um Número!')
+                return false
+            }
+            return true
+        }
+    
+        function emailCheck(email){
+            for(var i = 0; i < listUsers.length; i++){
+                if(listUsers[i]['Email'] == email){
+                    return true
+                }
+            }
+            return false
+        }
+
+        fetch("/UserData.json")
+            .then((data)=>{
+                return data.json()
+            })
+            .then((vector)=>{
+                getListUsers(vector)
+            })
+            .catch((e)=>{
+                console.log(e)
+            })
+
+        function getListUsers(vector){
+            listUsers = vector
+        }
+
+    </script>
+</body>
+</html>

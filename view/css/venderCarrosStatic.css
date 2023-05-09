@@ -1,0 +1,162 @@
+main{
+    width: 100%;
+    height: 90vh;
+    background-image: url(./PhotoGallery/background.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    font-family: WorkSans;
+    color: white;
+}
+    main section:first-child{
+        height: 100%;
+        width: 65%;
+        display: flex;
+        flex-flow: row wrap;
+        background-color: black;
+    }
+        main section:first-child aside{
+            width: 50%;
+            height: 100%;
+        }
+        main .DisplayLeft{
+            display: flex;
+            flex-flow: column wrap;
+            align-items: center;
+        }
+            main .DisplayLeft .titleForm{
+                width: 90%;
+                height: 3vh;
+                margin: 1vh 0;
+                font-size: 1rem;
+            }
+            main .DisplayLeft .text{
+                width: 90%;
+                height: 4vh;
+                background-color: rgb(0, 0, 0);
+                outline: 0;
+                color: white;
+                border-bottom: 0.2vh solid red;
+            }
+            main .DisplayLeft .text::placeholder, .textD::placeholder{
+                color: white;
+            }
+            main .DisplayLeft .textD{
+                width: 90%;
+                height: 14vh;
+                background-color: rgb(0, 0, 0);
+                outline: 0;
+                color: white;
+                resize: none;
+                border-bottom: 0.2vh solid red;
+            }
+            main .DisplayLeft .select{
+                width: 90%;
+                height: 3.25vh;
+                background-color:white;
+                outline: 0;
+                color: black;
+            }
+
+        main .DisplayRight{
+            display: flex;
+            flex-flow: column wrap;
+            align-items: center;
+        }
+            main .DisplayRight .titleForm{
+                width: 90%;
+                height: 3vh;
+                margin: 1vh 0;
+                font-size: 1rem;
+            }
+            main .DisplayRight .select{
+                width: 90%;
+                height: 3.25vh;
+                background-color:white;
+                outline: 0;
+                color: black;
+            }
+            main .DisplayRight .arq{
+                margin: 1vh 0;
+                color: black;
+                padding: 0.5vh 0.2vh;
+                background-color:white;
+                display: none;
+            }
+            main .DisplayRight .label{
+                width: 40%;
+                height: 3vh;
+                margin: 0.5vh 0;
+                padding: 1vh 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: black;
+                background-color: white;
+            }
+            main .DisplayRight p{
+                width: 50%;
+                font-size: 1.2rem;
+                text-align: center;
+                padding: 1vh 0;
+                margin: 15vh 0;
+                background-color: red;
+            }
+    main section:last-child{
+        height: 100%;
+        width: 35%;
+    }
+        main section:last-child h4{
+            width: 100%;
+            height: 10vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: red;
+        }
+        main .boxCard{
+            width: 100%;
+            height: 80vh;
+            display: flex;
+            flex-flow: column wrap;
+            overflow-y: scroll;
+        }
+        main .boxCard::-webkit-scrollbar{
+            width: 0;
+        }
+        main .boxCard .card{
+            margin: 1vh;
+            width: calc(100% - 2vh);
+            height: 24vh;
+            border-radius: 4vh;
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            background-color: rgb(255, 255, 255);
+        }
+            main .card img{
+                width: 20vh;
+                height: 20vh;
+                margin: 2vh;
+            }
+            main .card h5{
+                width: calc(100% - 26vh);
+                height: 5vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.2rem;
+                color: black;
+            }
+
+
+@font-face {    
+    font-family: WorkSans;    
+    src: url(./font/WorkSans.ttf);
+}

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="view\\css\\headerStatic.css">
+    <link rel="stylesheet" href="view\\css\\redefinirStatic.css">
+    <title>Auto Shop - Redefinir Senha</title>
+</head>
+<body>
+    <header>
+        <a id="icon" href="http:\\localhost:8000/">
+            <img src="view\\css\\PhotoGallery\\logo.png" alt="">
+            <h1>AUTO <span>SHOP</span></h1>
+        </a>
+        <nav>
+            <a href="http:\\localhost:8000/operacoes">Operações</a>
+            <a href="http:\\localhost:8000/contato">Contato</a>
+        </nav>
+        <aside id="displayConfig">
+            <img src="view\\css\\PhotoGallery\\userIcon.png" alt="">
+            <h2 id="LoginArea" onclick="login()">Entre ou cadastra-se</h2>
+            <h3 id="Exit" onclick="set()">sair</h3>
+        </aside>
+    </header>
+    <main>
+        <section>
+            <div>REDEFINIR SENHA</div>
+            <aside id="BOXTESTE">
+                <input type="email" name="" id="Email" placeholder="Email">
+                <p id="Button" onclick="sendMessage()">Enviar código</p>
+            </aside>
+            <aside id="DisplayTwo">
+                <input type="number" name="" id="Codigo" placeholder="Código">
+                <p id="Button" onclick="authCode()">Verificar código</p>
+            </aside>
+            <aside id="DisplayTree">
+                <input type="password" name="" id="Password" placeholder="Digite a nova senha">
+                <p id="Button" onclick="resetPassWord()">Redefinir senha</p>
+            </aside>         
+        </section>
+    </main>
+    <script>
+        const Email = document.getElementById("Email")
+        const Display2 = document.getElementById("DisplayTwo")
+        const Display3 = document.getElementById("DisplayTree")
+        const Codigo = document.getElementById("Codigo")
+        const Password = document.getElementById("Password")
+        var listUsers = []
+        var CODE = 0
+
+        function sendMessage(){
+            if(!authEmail() || Email.value.length == 0){
+                alert('Email incorreto ou Não existe, tente novamente por favor!')
+                return
+            }
+            else{
+                code()
+                const request = new XMLHttpRequest()
+                request.open("POST", "/sendCode")
+                request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
+                var files = JSON.stringify({
+                    "Email":Email.value,
+                    "Codigo":CODE
+                })
+                request.send(files)
+                request.onload = () => {
+                    if (request.readyState == 4 && request.status == 201){
+                        console.log('ok')
+                        Display2.style.visibility = "visible"
+                    } else {
+                        alert(`Erro, por favor tente novamente!`);
+                    }
+                } 
+            }
+        }
+
+        function authEmail(){
+            for(var i = 0; i < listUsers.length; i++){
+                if(listUsers[i]['Email'] == Email.value){
+                    return true
+                }
+            }
+            return false
+        }
+
+        function code(){
+            n = Math.random()*1000000
+            n = Math.floor(n)
+            CODE = n
+        }
+
+        function authCode(){
+            if(Codigo.value == CODE){
+                Display3.style.visibility = "visible"
+            }
+            else{
+                alert('Código invalido, tente novamente!')
+                return
+            }
+        }
+
+        function resetPassWord(){
+            if(validatePassWord(Password.value)){
+                const request = new XMLHttpRequest()
+                request.open("POST", "/setPassword")
+                request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
+                var files = JSON.stringify({
+                    "Email":Email.value,
+                    "Password":Password.value
+                })
+                request.send(files)
+                request.onload = () => {
+                    if (request.readyState == 4 && request.status == 201){
+                        window.location.href = "/login"
+                    } else {
+                        alert(`Erro, por favor tente novamente!`);
+                    }
+                } 
+            }
+        }
+
+        function validatePassWord(senha){
+            if(senha.length < 8){
+                alert('Por favor insira uma Senha com +8 dígitos!')
+                return false
+            }
+            const regex = /[0-9]/
+            if(!regex.test(senha)){
+                alert('Por favor insira uma Senha com ao menos um Número!')
+                return false
+            }
+            return true
+        }
+
+        fetch("/UserData.json")
+            .then((data)=>{
+                return data.json()
+            })
+            .then((vector)=>{
+                getListUsers(vector)
+            })
+            .catch((e)=>{
+                console.log(e)
+            })
+
+        function getListUsers(vector){
+            listUsers = vector
+        }
+    </script>
+</body>
+</html>

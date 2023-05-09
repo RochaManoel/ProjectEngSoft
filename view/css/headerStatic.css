@@ -1,0 +1,107 @@
+*{
+    border: 0;
+    margin: 0;
+}
+    header{
+        width: 90%;
+        padding: 0 5%;
+        height: 10vh;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-evenly;
+        align-items: center;
+        font-family: WorkSans;
+        background-color: rgb(0, 0, 0);
+    }
+        header #icon{
+            width: 30%;
+            height: 10vh;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+        }
+        header #icon:hover{
+            transition: transform ease 500ms;
+            transform: scale(1.05);
+        }
+            header #icon img{
+                width: 40%;
+                height: auto;
+            }
+            header #icon h1{
+                width: 45%;
+                font-size: 1.4rem;
+                text-align: center;
+                color: rgb(255, 255, 255);
+            }
+            header #icon span{
+                color: #ff0000;
+            }
+        header nav{
+            width: 40%;
+            height: 10vh;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+            header nav a{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 22%;
+                color: white;
+                text-decoration: none;
+            }
+            header nav a:hover{
+                transform: color 500ms ease;
+                color: #ff0000;
+                font-weight: bold;
+            }
+        header aside:last-child{
+            height: 10vh;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            align-items: center;
+            width: 30%;
+            cursor: pointer;
+            position: relative;
+        }
+            header aside:last-child img{
+                width: auto;
+                height: 5vh;
+                padding: 0.5vh;
+            }
+            header aside:last-child h2{
+                font-size: 1.2rem;
+                padding: 0vh 2%;
+                color: #ff0000;
+            }
+            header aside:last-child h3{
+                display: none;
+                position: absolute;
+                top: 10vh;
+                z-index: 10;
+                width: 100%;
+                padding: 2vh 0;
+                justify-content: center;
+                align-items: center;
+                color: red;
+                font-size: 1rem;
+                text-decoration: none;
+            }
+            header aside:last-child h3:hover{
+                cursor: pointer;
+                color: white;
+            }
+    header #displayConfig{
+        visibility: hidden;
+    }
+
+@font-face {
+    font-family: WorkSans;
+    src: url(./font/WorkSans.ttf);
+}

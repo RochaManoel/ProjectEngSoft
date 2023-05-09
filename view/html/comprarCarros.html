@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="view\\css\\headerStatic.css">
+    <link rel="stylesheet" href="view\\css\\ComprarCarroStatic.css">
+    <title>Auto Shop - Comprar</title>
+</head>
+<body>
+    <header>
+        <a id="icon" href="http:\\localhost:8000/">
+            <img src="view\\css\\PhotoGallery\\logo.png" alt="">
+            <h1>AUTO <span>SHOP</span></h1>
+        </a>
+        <nav>
+            <a href="http:\\localhost:8000/operacoes">Operações</a>
+            <a href="http:\\localhost:8000/contato">Contato</a>
+        </nav>
+        <aside>
+            <img src="view\\css\\PhotoGallery\\userIcon.png" alt="">
+            <h2 id="LoginArea">Entre ou cadastra-se</h2>
+            <h3 id="Exit">sair</h3>
+        </aside>
+    </header>
+    <main>
+        <h1>Lista de Veículos</h1>
+        <div class="boxCard" id="boxCard">
+        </div>
+    </main>
+    <script>
+        var listProducts = []
+        const boxCard = document.getElementById('boxCard')
+
+        function openCar(index){
+            var product = listProducts[index]
+            localStorage.setItem('placa',product['Placa'])
+            localStorage.setItem('emailProduto',product['Email'])
+            window.location.href = '/carro'
+        }
+
+        function isLoad(){
+            if(localStorage.getItem('isLoad') == 'true'){
+                document.getElementById('LoginArea').innerText = 'Olá, ' + localStorage.getItem('Nome') + ' ' + localStorage.getItem('Sobrenome')
+                control = false
+            }
+        }
+
+        isLoad()
+
+        fetch("/productData.json")
+            .then((data)=>{
+                return data.json()
+            })
+            .then((vector)=>{
+                getListUsers(vector)
+            })
+            .catch((e)=>{
+                console.log(e)
+            })
+
+        function getListUsers(vector){
+            var str = ''
+            listProducts = vector
+            for(var i = 0; i < listProducts.length; i++){
+                if(listProducts[i]['Email'] != localStorage.getItem('Email')){
+                    str+=`<div class="Card">
+                            <img src="${listProducts[i]['Foto']}" alt="">
+                            <div class="text">
+                                <div class="h1">${listProducts[i]['Titulo']}</div>
+                                <div class="h2">por: ${listProducts[i]['Nome']} ${listProducts[i]['Sobrenome']}</div>
+                                <div class="h3" onclick="openCar(${i})">Acessar</div>
+                            </div>
+                        </div>`
+                }
+            }
+            boxCard.innerHTML = str
+        }
+    </script>
+</body>
+</html>

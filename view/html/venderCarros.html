@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="view\\css\\headerStatic.css">
+    <link rel="stylesheet" href="view\\css\\venderCarrosStatic.css">
+    <title>Auto Shop - Vender</title>
+</head>
+<body>
+    <header>
+        <a id="icon" href="http:\\localhost:8000/">
+            <img src="view\\css\\PhotoGallery\\logo.png" alt="">
+            <h1>AUTO <span>SHOP</span></h1>
+        </a>
+        <nav>
+            <a href="http:\\localhost:8000/operacoes">Operações</a>
+            <a href="http:\\localhost:8000/contato">Contato</a>
+        </nav>
+        <aside>
+            <img src="view\\css\\PhotoGallery\\userIcon.png" alt="">
+            <h2 id="LoginArea">Entre ou cadastra-se</h2>
+            <h3 id="Exit">sair</h3>
+        </aside>
+    </header>
+    <main>
+        <section>
+            <aside class="DisplayLeft">
+                <div class="titleForm">Título:</div>
+                <input type="text" class="text" id="Titulo" placeholder="Definição do Modelo e Título">
+                <div class="titleForm">Descrição:</div>
+                <textarea name="" class="textD" id="Descricao" maxlength="300" placeholder="Digite a Descrição do Veículo"></textarea>
+                <div class="titleForm">Placa:</div>
+                <input type="text" class="text" id="Placa" placeholder="Digite a Placa">
+                <div class="titleForm">Cor:</div>
+                <input type="text" class="text" id="Cor" placeholder="Digite a Cor">
+                <div class="titleForm">Quilometragem:</div>
+                <input type="text" class="text" id="KM" placeholder="Digite a KM">
+                <div class="titleForm">Preço:</div>
+                <input type="text" class="text" id="Preco" placeholder="Digite o Valor">
+                <div class="titleForm">Marca:</div>
+                <select name="" id="Marca" class="select">
+                    <option value="Selecione">Selecione</option>
+                    <option value="Audi">Audi</option>
+                    <option value="BMW">BMW</option>
+                    <option value="BYD">BYD</option>
+                    <option value="Chery">Chery</option>  
+                    <option value="Citroen">Citroen</option>
+                    <option value="Dodge">Dodge</option>
+                    <option value="Ferrari">Ferrari</option>
+                    <option value="Fiat">Fiat</option>  
+                    <option value="Ford">Ford</option>
+                    <option value="Chevrolet">Chevrolet</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Hyundai">Hyundai</option> 
+                    <option value="Jaguar">Jaguar</option>
+                    <option value="Jeep">Jeep</option>
+                    <option value="Land Rover">Land Rover</option>
+                    <option value="MC Laren">MC Laren</option> 
+                    <option value="Mercedez-Bens">Mercedez-Bens</option>
+                    <option value="Mitsubishi">Mitsubishi</option>
+                    <option value="Nissan">Nissan</option>
+                    <option value="Peugeot">Peugeot</option> 
+                    <option value="Porshe">Porshe</option>
+                    <option value="RAM">RAM</option>
+                    <option value="Tesla">Tesla</option>
+                    <option value="Toyota">Toyota</option> 
+                    <option value="Troller">Troller</option>
+                    <option value="Volvo">Volvo</option>
+                    <option value="Volkswagen">Volkswagen</option>
+                </select>
+                <div class="titleForm">Tipo:</div>
+                <select name="" id="Tipo" class="select">
+                    <option value="Selecione">Selecione</option>
+                    <option value="SUV">SUV</option>
+                    <option value="Sedã">Sedã</option>
+                    <option value="Hatch">Hatch</option>
+                    <option value="Pick-Up">Pick-Up</option>
+                </select>
+            </aside>
+            <aside class="DisplayRight">
+                <div class="titleForm">Ano:</div>
+                <select name="" id="Ano" class="select">
+                    <option value="Selecione">Selecione</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                    <option value="2019">2019</option>
+                    <option value="2018">2018</option>
+                    <option value="2017">2017</option>
+                    <option value="2016">2016</option>
+                    <option value="2015">2015</option>
+                    <option value="2014">2014</option>
+                    <option value="2013">2013</option>
+                    <option value="2012">2012</option>
+                    <option value="2011">2011</option>
+                    <option value="2010">2010</option>
+                    <option value="2009">2009</option>
+                    <option value="2008">2008</option>
+                    <option value="2007">2007</option>
+                    <option value="2006">2006</option>
+                    <option value="2005">2005</option>
+                    <option value="2004">2004</option>
+                    <option value="2003">2003</option>
+                    <option value="2002">2002</option>
+                    <option value="2001">2001</option>
+                    <option value="2000">2000</option>
+                    <option value="2000-">2000 Anterior</option>
+                </select>
+                <div class="titleForm">Câmbio:</div>
+                <select name="" id="Cambio" class="select">
+                    <option value="Selecione">Selecione</option>
+                    <option value="Manual">Manual</option>
+                    <option value="Automático">Automático</option>
+                    <option value="Semi-Automático">Semi-Automático</option>
+                </select>
+                <div class="titleForm">Combustível:</div>
+                <select name="" id="Combustivel" class="select">
+                    <option value="Selecione">Selecione</option>
+                    <option value="Gasolina">Gasolina</option>
+                    <option value="Álcool">Álcool</option>
+                    <option value="Flex">Flex</option>
+                    <option value="Diesel">Diesel</option>
+                    <option value="Elétrico">Elétrico</option>
+                    <option value="Híbrido">Híbrido</option>
+                </select>
+                <div class="titleForm">Direção:</div>
+                <select name="" id="Direcao" class="select">
+                    <option value="Selecione">Selecione</option>
+                    <option value="Hidráulica">Hidráulica</option>
+                    <option value="Elétrica">Elétrica</option>
+                    <option value="Mecânica">Mecânica</option>
+                </select>
+                <div class="titleForm">Estado:</div>
+                <select name="" id="Estado" class="select">
+                    <option value="Selecione">Selecione</option>
+                    <option value="AC">AC</option>
+                    <option value="AL">AL</option>
+                    <option value="AP">AP</option>
+                    <option value="AM">AM</option>
+                    <option value="BA">BA</option>
+                    <option value="CE">CE</option>
+                    <option value="ES">ES</option>
+                    <option value="GO">GO</option>
+                    <option value="MA">MA</option>
+                    <option value="MT">MT</option>
+                    <option value="MS">MS</option>
+                    <option value="MG">MG</option>
+                    <option value="PA">PA</option>
+                    <option value="PB">PB</option>
+                    <option value="PR">PR</option>
+                    <option value="PE">PE</option>
+                    <option value="PI">PI</option>
+                    <option value="RJ">RJ</option>
+                    <option value="RN">RN</option>
+                    <option value="RS">RS</option>
+                    <option value="RO">RO</option>
+                    <option value="RR">RR</option>
+                    <option value="SC">SC</option>
+                    <option value="SP">SP</option>
+                    <option value="SE">SE</option>
+                    <option value="TO">TO</option>
+                    <option value="DF">DF</option>
+                </select>
+                <div class="titleForm">Fotos:</div>
+                <label for="FotoCapa" class="label">Foto de Capa</label>
+                <input type="file" name="FotoCapa" id="FotoCapa" class="arq">
+                <p onclick="adicionarCarro()">Anunciar carro</p>
+            </aside>
+        </section>
+        <section>
+            <h4>Lista de Postagens</h4>
+            <div class="boxCard" id="boxCard">
+                
+            </div>
+        </section>
+    </main>
+    <script>
+        const Titulo = document.getElementById('Titulo')
+        const Descricao = document.getElementById('Descricao')
+        const Placa = document.getElementById('Placa')
+        const Cor = document.getElementById('Cor')
+        const KM = document.getElementById('KM')
+        const Preco = document.getElementById('Preco')
+        const Marca = document.getElementById('Marca')
+        const Tipo = document.getElementById('Tipo')
+        const Ano = document.getElementById('Ano')
+        const Cambio = document.getElementById('Cambio')
+        const Combustivel = document.getElementById('Combustivel')
+        const Direcao = document.getElementById('Direcao')
+        const Estado = document.getElementById('Estado')
+        const FotoCapa = document.getElementById('FotoCapa')
+        const Foto01 = document.getElementById('Foto01')
+        const Foto02 = document.getElementById('Foto02')
+        var listProducts = []
+
+        const boxCard = document.getElementById('boxCard')
+
+        function adicionarCarro(){
+            if(Titulo.value == ''){
+                alert('Por favor digite um título válido!')
+                return
+            }
+            if(Descricao.value == ''){
+                alert('Por favor digite uma descrição válida!')
+                return
+            }
+            if(Placa.value == ''){
+                alert('Placa inválida!')
+                return
+            }
+            if(Cor.value == ''){
+                alert('Por favor digite uma cor válida!')
+                return
+            }
+            if(KM.value == ''){
+                alert('Por favor digite uma Quilometragem válida!')
+                return
+            }
+            if(Preco.value == ''){
+                alert('Ppreço inválido!')
+                return
+            }
+            if(Marca.value == 'Selecione'){
+                alert('Escolha uma Marca disponível!')
+                return
+            }
+            if(Tipo.value == 'Selecione'){
+                alert('Escolha um Tipo disponível!')
+                return
+            }
+            if(Ano.value == 'Selecione'){
+                alert('Escolha um ano válido!')
+                return
+            }
+            if(Cambio.value == 'Selecione'){
+                alert('Escolha um Câmbio válido!')
+                return
+            }
+            if(Combustivel.value == 'Selecione'){
+                alert('Escolha um Combustível válido!')
+                return
+            }
+            if(Direcao.value == 'Selecione'){
+                alert('Escolha uma Direção válida!')
+                return
+            }
+            if(Estado.value == 'Selecione'){
+                alert('Escolha um Estado válido!')
+                return
+            }
+            if(FotoCapa.value == ''){
+                alert('Adicione uma foto de capa válida!')
+                return
+            }
+
+            const request = new XMLHttpRequest()
+            request.open("POST", "/setProduct")
+            request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
+            var files = JSON.stringify({
+                "Nome": localStorage.getItem('Nome'),
+                "Sobrenome": localStorage.getItem('Sobrenome'),
+                "Email": localStorage.getItem('Email'),
+                "Titulo": Titulo.value,
+                "Descricao": Descricao.value,
+                "Placa": Placa.value,
+                "Cor": Cor.value,
+                "KM": KM.value,
+                "Preco": Preco.value,
+                "Marca": Marca.value,
+                "Tipo": Tipo.value,
+                "Ano": Ano.value,
+                "Cambio": Cambio.value,
+                "Combustivel": Combustivel.value,
+                "Direcao": Direcao.value,
+                "Estado": Estado.value,
+                "FotoCapa": "editar"
+            })
+            request.send(files)
+            request.onload = () => {
+                if (request.readyState == 4 && request.status == 201){
+                    console.log('ok')
+                } else {
+                    alert(`Erro, por favor tente novamente!`);
+                }
+            } 
+
+        }
+
+        function isLoad(){
+            if(localStorage.getItem('isLoad') == 'true'){
+                document.getElementById('LoginArea').innerText = 'Olá, ' + localStorage.getItem('Nome') + ' ' + localStorage.getItem('Sobrenome')
+                control = false
+            }
+        }
+
+        isLoad()
+
+        fetch("/productData.json")
+            .then((data)=>{
+                return data.json()
+            })
+            .then((vector)=>{
+                getListUsers(vector)
+            })
+            .catch((e)=>{
+                console.log(e)
+            })
+
+        function getListUsers(vector){
+            var str = ''
+            listProducts = vector
+            for(var i = 0; i < listProducts.length; i++){
+                if(listProducts[i]['Email'] == localStorage.getItem('Email')){
+                    str+=`<div class="card">
+                            <img src="${listProducts[i]['Foto']}" alt="">
+                            <h5>${listProducts[i]['Titulo']}</h5>
+                        </div>`
+                    console.log(listProducts[i]['Foto'])
+                    console.log(listProducts[i]['Foto'])
+                }
+            }
+            boxCard.innerHTML = str
+        }
+
+
+    </script>
+</body>
+</html>

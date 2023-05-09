@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="view\\css\\headerStatic.css">
+    <link rel="stylesheet" href="view\\css\\carroStatic.css">
+    <title>Auto Shop - Carro</title>
+</head>
+<body>
+    <header>
+        <a id="icon" href="http:\\localhost:8000/">
+            <img src="view\\css\\PhotoGallery\\logo.png" alt="">
+            <h1>AUTO <span>SHOP</span></h1>
+        </a>
+        <nav>
+            <a href="http:\\localhost:8000/operacoes">Operações</a>
+            <a href="http:\\localhost:8000/contato">Contato</a>
+        </nav>
+        <aside>
+            <img src="view\\css\\PhotoGallery\\userIcon.png" alt="">
+            <h2 id="LoginArea">Entre ou cadastra-se</h2>
+            <h3 id="Exit">sair</h3>
+        </aside>
+    </header>
+    <main>
+        <section id="Display">
+        </section>
+    </main>
+    <script>
+        const Display = document.getElementById('Display')
+        const Message = document.getElementById('Message')
+        var listProducts = []
+
+        function sendMessage(){
+            const request = new XMLHttpRequest()
+            request.open("POST", "/sendMessage")
+            request.setRequestHeader("Content-Type", "application/json; charset=UTF-8")
+            var files = JSON.stringify({
+                "Email":localStorage.getItem('emailProduto'),
+                "Email comprador":localStorage.getItem('Email')
+            })
+            request.send(files)
+            request.onload = () => {
+                if (request.readyState == 4 && request.status == 201){
+                    alert('Mensagem enviada com sucesso!')
+                } else {
+                    alert(`Erro, por favor tente novamente!`);
+                }
+            } 
+        }
+
+        function isLoad(){
+            if(localStorage.getItem('isLoad') == 'true'){
+                document.getElementById('LoginArea').innerText = 'Olá, ' + localStorage.getItem('Nome') + ' ' + localStorage.getItem('Sobrenome')
+                control = false
+            }
+        }
+
+        isLoad()
+
+        fetch("/productData.json")
+            .then((data)=>{
+                return data.json()
+            })
+            .then((vector)=>{
+                getListUsers(vector)
+            })
+            .catch((e)=>{
+                console.log(e)
+            })
+
+        function getListUsers(vector){
+            var str = ''
+            listProducts = vector
+            for(var i = 0; i < listProducts.length; i++){
+                if(listProducts[i]['Email'] == localStorage.getItem('emailProduto') && listProducts[i]['Placa'] == localStorage.getItem('placa')){
+                    console.log(listProducts[i])
+                    str+=`<div class="picture">
+                            <div class="img"><img src="${listProducts[i]['Foto']}" alt=""></div>
+                            <h4>por: ${listProducts[i]['Nome']} ${listProducts[i]['Sobrenome']}, ${listProducts[i]['Estado']}</h4>
+                        </div>
+                        <div class="card">
+                            <h1>${listProducts[i]['Titulo']}</h1>
+                            <h2>Marca: ${listProducts[i]['Marca']}</h2>
+                            <h2>Tipo: ${listProducts[i]['Tipo']}</h2>
+                            <h2>KM: ${listProducts[i]['KM']}</h2>
+                            <h2>Ano: ${listProducts[i]['Ano']}</h2>
+                            <h2>Cor: ${listProducts[i]['Cor']}</h2>
+                            <h3>Preço: R$${editPreco(listProducts[i]['Preco'])},00</h3>
+                        </div>
+                        <div class="contact">
+                            <h1>Me contate:</h1>
+                            <textarea name="" id="Message" maxlength="300" placeholder="Enviar Mensagem"></textarea>
+                            <p onclick="sendMessage()">Enviar Mensagem</p>
+                        </div>
+                        <div class="moreInf">
+                            <h3>${listProducts[i]['Descricao']}</h3>
+                            <div class="caracteristicas">
+                                <h2>Câmbio: ${listProducts[i]['Cambio']}</h2>
+                                <h2>Combustível: ${listProducts[i]['Combustivel']}</h2>
+                                <h2>Direção: ${listProducts[i]['Direcao']}</h2>
+                            </div>
+                            <img src="view\\css\\PhotoGallery\\logo.png" alt="">
+                        </div>`
+                }
+            }
+            Display.innerHTML = str
+        }
+
+        function editPreco(valor){
+            if (typeof valor !== 'string') {
+                valor = valor.toString(); 
+            }
+            if (valor.length > 3) {
+                var ultimosTres = valor.slice(-3);
+                var resto = valor.slice(0, -3); 
+                return resto + '.' + ultimosTres; 
+            } else {
+                return valor; 
+            }
+        }
+    </script>
+</body>
+</html>
